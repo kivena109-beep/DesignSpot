@@ -3,158 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>معرض التصاميم والمنتجات</title>
+    <title>العروض الحصرية والتصاميم المميزة</title>
     <style>
         * {
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        body {
-            background-color: #f4f6f8;
-            color: #333;
-            padding: 20px;
-        }
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        header h1 {
-            color: #111;
-            font-size: 2rem;
-            margin-bottom: 8px;
-        }
-        header p {
-            color: #666;
-        }
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .card {
-            background: #fff;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-        }
-        .badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: #ff3e3e;
+
+        body { 
+            height: 100vh; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
             color: #fff;
-            font-size: 0.8rem;
-            font-weight: bold;
-            padding: 4px 10px;
+            overflow: hidden;
+        }
+
+        /* بطاقة العرض الرئيسية */
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px 30px;
             border-radius: 20px;
-        }
-        .card img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-        }
-        .card-body {
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-            justify-content: space-between;
-        }
-        .card-title {
-            font-size: 1.1rem;
-            font-weight: bold;
-            margin-bottom: 8px;
-            color: #222;
-        }
-        .card-desc {
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 15px;
-            line-height: 1.4;
-        }
-        .btn-amazon {
-            display: block;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
             text-align: center;
-            background-color: #ff9900;
-            color: #111;
-            font-weight: bold;
-            padding: 12px;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: background-color 0.2s;
+            max-width: 420px;
+            width: 90%;
+            animation: fadeIn 0.8s ease-in-out;
         }
-        .btn-amazon:hover {
-            background-color: #e68a00;
+
+        .badge {
+            display: inline-block;
+            background: #ff4757;
+            color: #fff;
+            padding: 5px 15px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            border-radius: 50px;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .card h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: #ccc;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        /* زر التفاعل الرئيسي */
+        .action-button {
+            width: 100%;
+            padding: 16px 20px;
+            background: linear-gradient(45deg, #ff9900, #ffb700);
+            color: #111;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(255, 153, 0, 0.4);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .action-button:hover {
+            background: linear-gradient(45deg, #ffb700, #ff9900);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 153, 0, 0.6);
+        }
+
+        .action-button:active {
+            transform: translateY(1px);
+            box-shadow: 0 4px 10px rgba(255, 153, 0, 0.3);
+        }
+
+        .counter {
+            margin-top: 15px;
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>أحدث التصاميم والمنتجات</h1>
-        <p>اختر التصميم المفضّل لديك للاطلاع على التفاصيل والشراء مباشرة من أمازون</p>
-    </header>
+    <div class="card">
+        <span class="badge">عروض لفترة محدودة</span>
+        <h1>اكتشف أحدث التصاميم</h1>
+        <p>اضغط على الزر بالأسفل للاطلاع على المجموعة الحصرية مباشرة عبر المنصة.</p>
 
-    <div class="gallery" id="galleryContainer">
-        <!-- التصاميم تظهر هنا تلقائياً -->
+        <button class="action-button" id="mainBtn">
+            <span>استعراض التصميم</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </button>
+
+        <div class="counter" id="statusText">التصميم 1 من 3</div>
     </div>
 
     <script>
-        // ضع روابط الصور وروابط منتجاتك على أمازون هنا
-        const designs = [
-            {
-                title: "تصميم Urban Streetwear T-Shirt",
-                description: "تصميم عصري جذاب يناسب الإطلالات اليومية والشبابية.",
-                image: "https://via.placeholder.com/400x300",
-                amazonUrl: "https://www.amazon.com/dp/YOUR_PRODUCT_ID_1",
-                badge: "Popular"
-            },
-            {
-                title: "تصميم Vintage Graphic Art",
-                description: "طابع كلاسيكي مميز مع ألوان متناسقة وجودة عالية.",
-                image: "https://via.placeholder.com/400x300",
-                amazonUrl: "https://www.amazon.com/dp/YOUR_PRODUCT_ID_2",
-                badge: "Trending"
-            },
-            {
-                title: "تصميم Minimalist Quote",
-                description: "تصميم بسيط وأنيق يعبر عن أسلوب فريد.",
-                image: "https://via.placeholder.com/400x300",
-                amazonUrl: "https://www.amazon.com/dp/YOUR_PRODUCT_ID_3",
-                badge: "New"
-            }
+        const myPinterestAds = [
+            "https://pin.it/4xbY20lzh",
+            "https://pin.it/72xpNqHsi",
+            "https://pin.it/3UP33Fuis"
         ];
 
-        const container = document.getElementById('galleryContainer');
+        let currentAdIndex = 0;
+        const mainBtn = document.getElementById('mainBtn');
+        const statusText = document.getElementById('statusText');
 
-        designs.forEach(item => {
-            const card = document.createElement('div');
-            card.className = 'card';
-            card.innerHTML = `
-                <div class="badge">${item.badge}</div>
-                <img src="${item.image}" alt="${item.title}">
-                <div class="card-body">
-                    <div>
-                        <div class="card-title">${item.title}</div>
-                        <div class="card-desc">${item.description}</div>
-                    </div>
-                    <a href="${item.amazonUrl}" target="_blank" class="btn-amazon">شاهد المنتج على Amazon</a>
-                </div>
-            `;
-            container.appendChild(card);
+        mainBtn.addEventListener('click', function() {
+            if (currentAdIndex < myPinterestAds.length) {
+                window.open(myPinterestAds[currentAdIndex], '_blank');
+                currentAdIndex++;
+
+                if (currentAdIndex < myPinterestAds.length) {
+                    statusText.textContent = `التصميم ${currentAdIndex + 1} من ${myPinterestAds.length}`;
+                } else {
+                    statusText.textContent = "تم عرض جميع التصاميم";
+                    mainBtn.style.opacity = "0.7";
+                }
+            }
         });
     </script>
+
 </body>
 </html>
