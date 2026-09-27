@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="pageTitle">معرض التصاميم المباشرة</title>
+    <title id="pageTitle">العروض الحصرية والتصاميم المميزة</title>
     <style>
         * {
             box-sizing: border-box;
@@ -13,13 +13,13 @@
         }
 
         body { 
-            min-height: 100vh; 
+            height: 100vh; 
             display: flex; 
             justify-content: center; 
             align-items: center; 
             background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
             color: #fff;
-            padding: 20px;
+            overflow: hidden;
             position: relative;
         }
 
@@ -61,12 +61,12 @@
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 30px 25px;
+            padding: 40px 30px;
             border-radius: 20px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
             text-align: center;
             max-width: 420px;
-            width: 100%;
+            width: 90%;
             animation: fadeIn 0.8s ease-in-out;
         }
 
@@ -84,76 +84,29 @@
         }
 
         .card h1 {
-            font-size: 1.6rem;
-            margin-bottom: 8px;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
             color: #fff;
         }
 
         .card p {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: #ccc;
-            margin-bottom: 20px;
-            line-height: 1.4;
+            margin-bottom: 25px;
+            line-height: 1.5;
         }
 
-        /* معاينة الصورة القابلة للنقر */
-        .image-container {
-            position: relative;
-            width: 100%;
-            height: 240px;
-            border-radius: 12px;
-            overflow: hidden;
-            margin-bottom: 20px;
-            cursor: pointer;
-            border: 2px solid rgba(255, 153, 0, 0.3);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
-
-        .image-container:hover {
-            transform: scale(1.02);
-            border-color: #ff9900;
-        }
-
-        .image-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .image-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            color: #fff;
-            font-weight: bold;
-            font-size: 1.1rem;
-        }
-
-        .image-container:hover .image-overlay {
-            opacity: 1;
-        }
-
-        /* مؤشر النقاط */
+        /* مؤشر النقاط لتوضيح العناصر الثلاثة */
         .dots-container {
             display: flex;
             justify-content: center;
             gap: 8px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .dot {
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             background: rgba(255, 255, 255, 0.2);
             border-radius: 50%;
             transition: all 0.3s ease;
@@ -161,17 +114,17 @@
 
         .dot.active {
             background: #ff9900;
-            width: 25px;
+            width: 28px;
             border-radius: 10px;
         }
 
-        /* زر التفاعل */
+        /* زر التفاعل الرئيسي */
         .action-button {
             width: 100%;
-            padding: 14px 20px;
+            padding: 16px 20px;
             background: linear-gradient(45deg, #ff9900, #ffb700);
             color: #111;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: bold;
             border: none;
             border-radius: 12px;
@@ -186,7 +139,13 @@
 
         .action-button:hover {
             background: linear-gradient(45deg, #ffb700, #ff9900);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 153, 0, 0.6);
+        }
+
+        .action-button:active {
+            transform: translateY(1px);
+            box-shadow: 0 4px 10px rgba(255, 153, 0, 0.3);
         }
 
         [dir="rtl"] .action-button svg {
@@ -194,7 +153,7 @@
         }
 
         .counter {
-            margin-top: 12px;
+            margin-top: 15px;
             font-size: 0.85rem;
             color: #aaa;
         }
@@ -215,15 +174,9 @@
 
     <!-- البطاقة الرئيسية -->
     <div class="card">
-        <span class="badge" id="badgeText">عرض الصور المباشرة</span>
-        <h1 id="headingText">استعراض التصاميم</h1>
-        <p id="descText">اضغط على الزر أو الصورة لفتح الصفحة والتنقل للتالية.</p>
-
-        <!-- الصورة القابلة للنقر -->
-        <div class="image-container" id="imageBox">
-            <img src="https://via.placeholder.com/500x300/203a43/ffffff?text=Design+Preview" id="designImg" alt="Design Preview">
-            <div class="image-overlay" id="overlayText">فتح الصورة المباشرة 🖼️</div>
-        </div>
+        <span class="badge" id="badgeText">عروض لفترة محدودة</span>
+        <h1 id="headingText">اكتشف أحدث التصاميم</h1>
+        <p id="descText">اضغط على الزر بالأسفل للاطلاع على التصميم الحالي والانتقال للتالي.</p>
 
         <!-- مؤشر النقاط -->
         <div class="dots-container">
@@ -233,19 +186,18 @@
         </div>
 
         <button class="action-button" id="mainBtn">
-            <span id="btnText">فتح الصورة والتالي</span>
+            <span id="btnText">فتح التصميم والتالي</span>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
         </button>
 
-        <div class="counter" id="statusText">الصورة 1 من 3</div>
+        <div class="counter" id="statusText">التصميم 1 من 3</div>
     </div>
 
     <script>
-        // روابط Pinterest المباشرة التي أرفقتها
-        const directImageLinks = [
-            "https://www.pinterest.com/pin/1127799931722268616/feedback/?invite_code=f8b42eea2dad42cfbc7b44c7e633472a&sender_id=1127800069093914891",
-            "https://www.pinterest.com/pin/1127799931722268862/feedback/?invite_code=0f9d17b010a34397bb08eb85ec7cad91&sender_id=1127800069093914891",
-            "https://www.pinterest.com/pin/112779993172270007/feedback/?invite_code=9b8b4c1818ab44f0a36d4650a8a24ae1&sender_id=1127800069093914891"
+        const myPinterestAds = [
+            "https://pin.it/4xbY20lzh",
+            "https://pin.it/72xpNqHsi",
+            "https://pin.it/3UP33Fuis"
         ];
 
         let currentAdIndex = 0;
@@ -253,31 +205,28 @@
 
         const translations = {
             ar: {
-                title: "معرض التصاميم المباشرة",
-                badge: "عرض الصور المباشرة",
-                heading: "استعراض التصاميم",
-                desc: "اضغط على الزر أو الصورة لفتح الصفحات بالتتابع.",
-                overlay: "فتح الصورة المباشرة 🖼️",
-                btnNext: "فتح الصورة والتالي",
-                btnFinish: "تمت مشاهدة جميع الصور",
-                counter: (curr, total) => `الصورة ${curr} من ${total}`,
-                completed: "تم استعراض كل الصور"
+                title: "العروض الحصرية والتصاميم المميزة",
+                badge: "عروض لفترة محدودة",
+                heading: "اكتشف أحدث التصاميم",
+                desc: "اضغط على الزر للاطلاع على التصميم في نافذة جديدة والانتقال للتالي.",
+                btnNext: "فتح التصميم والتالي",
+                btnFinish: "تمت مشاهدة الكل",
+                counter: (curr, total) => `التصميم ${curr} من ${total}`,
+                completed: "تم عرض جميع التصاميم بنجاح"
             },
             en: {
-                title: "Direct Image Gallery",
-                badge: "Direct View",
-                heading: "Browse Designs",
-                desc: "Click the image or button to open the pages in sequence.",
-                overlay: "Open Image 🖼️",
-                btnNext: "Open Image & Next",
-                btnFinish: "All Images Viewed",
-                counter: (curr, total) => `Image ${curr} of ${total}`,
-                completed: "All images browsed"
+                title: "Exclusive Offers & Designs",
+                badge: "Limited Time Offers",
+                heading: "Discover Latest Designs",
+                desc: "Click the button to open the design in a new tab and move to the next.",
+                btnNext: "Open Design & Next",
+                btnFinish: "All Viewed",
+                counter: (curr, total) => `Design ${curr} of ${total}`,
+                completed: "All designs viewed successfully"
             }
         };
 
         const mainBtn = document.getElementById('mainBtn');
-        const imageBox = document.getElementById('imageBox');
         const statusText = document.getElementById('statusText');
 
         function setLanguage(lang) {
@@ -291,7 +240,12 @@
             document.getElementById('badgeText').textContent = t.badge;
             document.getElementById('headingText').textContent = t.heading;
             document.getElementById('descText').textContent = t.desc;
-            document.getElementById('overlayText').textContent = t.overlay;
+            
+            if (currentAdIndex < myPinterestAds.length) {
+                document.getElementById('btnText').textContent = t.btnNext;
+            } else {
+                document.getElementById('btnText').textContent = t.btnFinish;
+            }
 
             document.getElementById('btnAr').classList.toggle('active', lang === 'ar');
             document.getElementById('btnEn').classList.toggle('active', lang === 'en');
@@ -302,34 +256,35 @@
         function updateUI() {
             const t = translations[currentLang];
             
-            if (currentAdIndex < directImageLinks.length) {
-                for (let i = 0; i < directImageLinks.length; i++) {
-                    document.getElementById(`dot${i}`).className = (i === currentAdIndex) ? 'dot active' : 'dot';
+            // تحديث النقاط (Dots)
+            for (let i = 0; i < myPinterestAds.length; i++) {
+                const dot = document.getElementById(`dot${i}`);
+                if (i === currentAdIndex) {
+                    dot.className = 'dot active';
+                } else {
+                    dot.className = 'dot';
                 }
+            }
 
-                statusText.textContent = t.counter(currentAdIndex + 1, directImageLinks.length);
+            // تحديث النص والعداد
+            if (currentAdIndex < myPinterestAds.length) {
+                statusText.textContent = t.counter(currentAdIndex + 1, myPinterestAds.length);
                 document.getElementById('btnText').textContent = t.btnNext;
             } else {
                 statusText.textContent = t.completed;
                 document.getElementById('btnText').textContent = t.btnFinish;
                 mainBtn.style.opacity = "0.6";
                 mainBtn.style.cursor = "default";
-                imageBox.style.cursor = "default";
             }
         }
 
-        function handleNextAction() {
-            if (currentAdIndex < directImageLinks.length) {
-                window.open(directImageLinks[currentAdIndex], '_blank');
+        mainBtn.addEventListener('click', function() {
+            if (currentAdIndex < myPinterestAds.length) {
+                window.open(myPinterestAds[currentAdIndex], '_blank');
                 currentAdIndex++;
                 updateUI();
             }
-        }
-
-        mainBtn.addEventListener('click', handleNextAction);
-        imageBox.addEventListener('click', handleNextAction);
-
-        setLanguage('ar');
+        });
     </script>
 
 </body>
