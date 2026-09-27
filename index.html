@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>العروض الحصرية والتصاميم المميزة</title>
+    <title id="pageTitle">العروض الحصرية والتصاميم المميزة</title>
     <style>
         * {
             box-sizing: border-box;
@@ -20,6 +20,41 @@
             background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
             color: #fff;
             overflow: hidden;
+            position: relative;
+        }
+
+        /* شريط اختيار اللغة في الأعلى */
+        .language-switcher {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        /* تعديل موقع زر اللغة عند ضبط الاتجاه للإنجليزية */
+        [dir="ltr"] .language-switcher {
+            left: auto;
+            right: 20px;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover, .lang-btn.active {
+            background: #ff9900;
+            color: #111;
+            font-weight: bold;
+            border-color: #ff9900;
         }
 
         /* بطاقة العرض الرئيسية */
@@ -92,10 +127,19 @@
             box-shadow: 0 4px 10px rgba(255, 153, 0, 0.3);
         }
 
+        .action-button svg {
+            transition: transform 0.3s ease;
+        }
+
+        /* عكس اتجاه سهم الزر حسب لغة الصفحة */
+        [dir="rtl"] .action-button svg {
+            transform: rotate(180deg);
+        }
+
         .counter {
             margin-top: 15px;
-            font-size: 0.8rem;
-            color: #888;
+            font-size: 0.85rem;
+            color: #aaa;
         }
 
         @keyframes fadeIn {
@@ -106,13 +150,20 @@
 </head>
 <body>
 
+    <!-- أزرار تبديل اللغة -->
+    <div class="language-switcher">
+        <button class="lang-btn active" id="btnAr" onclick="setLanguage('ar')">العربية</button>
+        <button class="lang-btn" id="btnEn" onclick="setLanguage('en')">English</button>
+    </div>
+
+    <!-- البطاقة الرئيسية -->
     <div class="card">
-        <span class="badge">عروض لفترة محدودة</span>
-        <h1>اكتشف أحدث التصاميم</h1>
-        <p>اضغط على الزر بالأسفل للاطلاع على المجموعة الحصرية مباشرة عبر المنصة.</p>
+        <span class="badge" id="badgeText">عروض لفترة محدودة</span>
+        <h1 id="headingText">اكتشف أحدث التصاميم</h1>
+        <p id="descText">اضغط على الزر بالأسفل للاطلاع على المجموعة الحصرية مباشرة عبر المنصة.</p>
 
         <button class="action-button" id="mainBtn">
-            <span>استعراض التصميم</span>
+            <span id="btnText">استعراض التصميم</span>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
         </button>
 
@@ -127,18 +178,72 @@
         ];
 
         let currentAdIndex = 0;
+        let currentLang = 'ar';
+
+        // النصوص المترجمة للغتين
+        const translations = {
+            ar: {
+                title: "العروض الحصرية والتصاميم المميزة",
+                badge: "عروض لفترة محدودة",
+                heading: "اكتشف أحدث التصاميم",
+                desc: "اضغط على الزر بالأسفل للاطلاع على المجموعة الحصرية مباشرة عبر المنصة.",
+                btn: "استعراض التصميم",
+                counter: (curr, total) => `التصميم ${curr} من ${total}`,
+                completed: "تم عرض جميع التصاميم"
+            },
+            en: {
+                title: "Exclusive Offers & Designs",
+                badge: "Limited Time Offers",
+                heading: "Discover Latest Designs",
+                desc: "Click the button below to view the exclusive collection directly on the platform.",
+                btn: "View Design",
+                counter: (curr, total) => `Design ${curr} of ${total}`,
+                completed: "All designs viewed"
+            }
+        };
+
         const mainBtn = document.getElementById('mainBtn');
         const statusText = document.getElementById('statusText');
 
+        // وظيفة تغيير اللغة
+        function setLanguage(lang) {
+            currentLang = lang;
+            const t = translations[lang];
+
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+            document.getElementById('pageTitle').textContent = t.title;
+            document.getElementById('badgeText').textContent = t.badge;
+            document.getElementById('headingText').textContent = t.heading;
+            document.getElementById('descText').textContent = t.desc;
+            document.getElementById('btnText').textContent = t.btn;
+
+            // تحديث زر اللغة النشط
+            document.getElementById('btnAr').classList.toggle('active', lang === 'ar');
+            document.getElementById('btnEn').classList.toggle('active', lang === 'en');
+
+            // تحديث العداد حسب اللغة الحالية
+            updateStatusText();
+        }
+
+        function updateStatusText() {
+            const t = translations[currentLang];
+            if (currentAdIndex < myPinterestAds.length) {
+                statusText.textContent = t.counter(currentAdIndex + 1, myPinterestAds.length);
+            } else {
+                statusText.textContent = t.completed;
+            }
+        }
+
+        // حدث الضغط على الزر
         mainBtn.addEventListener('click', function() {
             if (currentAdIndex < myPinterestAds.length) {
                 window.open(myPinterestAds[currentAdIndex], '_blank');
                 currentAdIndex++;
+                updateStatusText();
 
-                if (currentAdIndex < myPinterestAds.length) {
-                    statusText.textContent = `التصميم ${currentAdIndex + 1} من ${myPinterestAds.length}`;
-                } else {
-                    statusText.textContent = "تم عرض جميع التصاميم";
+                if (currentAdIndex >= myPinterestAds.length) {
                     mainBtn.style.opacity = "0.7";
                 }
             }
