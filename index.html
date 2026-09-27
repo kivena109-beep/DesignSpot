@@ -30,8 +30,8 @@
         }
         .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
             max-width: 1200px;
             margin: 0 auto;
         }
@@ -43,14 +43,26 @@
             transition: transform 0.2s ease, box-shadow 0.2s ease;
             display: flex;
             flex-direction: column;
+            position: relative;
         }
         .card:hover {
-            transform: translateY(-4px);
+            transform: translateY(-5px);
             box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+        .badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #ff3e3e;
+            color: #fff;
+            font-size: 0.8rem;
+            font-weight: bold;
+            padding: 4px 10px;
+            border-radius: 20px;
         }
         .card img {
             width: 100%;
-            height: 220px;
+            height: 250px;
             object-fit: cover;
         }
         .card-body {
@@ -63,7 +75,14 @@
         .card-title {
             font-size: 1.1rem;
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
+            color: #222;
+        }
+        .card-desc {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.4;
         }
         .btn-amazon {
             display: block;
@@ -71,8 +90,8 @@
             background-color: #ff9900;
             color: #111;
             font-weight: bold;
-            padding: 10px;
-            border-radius: 6px;
+            padding: 12px;
+            border-radius: 8px;
             text-decoration: none;
             transition: background-color 0.2s;
         }
@@ -84,8 +103,8 @@
 <body>
 
     <header>
-        <h1>أحدث التصاميم والمنتجات على أمازون</h1>
-        <p>اختر التصميم المفضّل لديك للاطلاع على التفاصيل الكاملة والشراء مباشرة</p>
+        <h1>أحدث التصاميم والمنتجات</h1>
+        <p>اختر التصميم المفضّل لديك للاطلاع على التفاصيل والشراء مباشرة من أمازون</p>
     </header>
 
     <div class="gallery" id="galleryContainer">
@@ -93,22 +112,28 @@
     </div>
 
     <script>
-        // قائمة التصاميم مع روابط أمازون الخاصة بك
+        // ضع روابط الصور وروابط منتجاتك على أمازون هنا
         const designs = [
             {
-                title: "تصميم 1 - Vintage T-Shirt",
-                image: "https://via.placeholder.com/300x220",
-                amazonUrl: "https://www.amazon.com/dp/YOUR_PRODUCT_ID_1"
+                title: "تصميم Urban Streetwear T-Shirt",
+                description: "تصميم عصري جذاب يناسب الإطلالات اليومية والشبابية.",
+                image: "https://via.placeholder.com/400x300",
+                amazonUrl: "https://www.amazon.com/dp/YOUR_PRODUCT_ID_1",
+                badge: "Popular"
             },
             {
-                title: "تصميم 2 - Minimalist Graphic",
-                image: "https://via.placeholder.com/300x220",
-                amazonUrl: "https://www.amazon.com/dp/YOUR_PRODUCT_ID_2"
+                title: "تصميم Vintage Graphic Art",
+                description: "طابع كلاسيكي مميز مع ألوان متناسقة وجودة عالية.",
+                image: "https://via.placeholder.com/400x300",
+                amazonUrl: "https://www.amazon.com/dp/YOUR_PRODUCT_ID_2",
+                badge: "Trending"
             },
             {
-                title: "تصميم 3 - Streetwear Urban Design",
-                image: "https://via.placeholder.com/300x220",
-                amazonUrl: "https://www.amazon.com/dp/YOUR_PRODUCT_ID_3"
+                title: "تصميم Minimalist Quote",
+                description: "تصميم بسيط وأنيق يعبر عن أسلوب فريد.",
+                image: "https://via.placeholder.com/400x300",
+                amazonUrl: "https://www.amazon.com/dp/YOUR_PRODUCT_ID_3",
+                badge: "New"
             }
         ];
 
@@ -118,9 +143,13 @@
             const card = document.createElement('div');
             card.className = 'card';
             card.innerHTML = `
+                <div class="badge">${item.badge}</div>
                 <img src="${item.image}" alt="${item.title}">
                 <div class="card-body">
-                    <div class="card-title">${item.title}</div>
+                    <div>
+                        <div class="card-title">${item.title}</div>
+                        <div class="card-desc">${item.description}</div>
+                    </div>
                     <a href="${item.amazonUrl}" target="_blank" class="btn-amazon">شاهد المنتج على Amazon</a>
                 </div>
             `;
