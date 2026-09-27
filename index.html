@@ -1,74 +1,131 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Special Offers</title>
+    <title>معرض التصاميم والمنتجات</title>
     <style>
-        /* إعدادات الشاشة لجعل الزر في المنتصف تماماً */
-        body { 
-            margin: 0; 
-            padding: 0;
-            height: 100vh; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            background-color: #2c3e50; /* لون خلفية داكن وأنيق */
+        * {
+            box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
         }
-
-        /* تصميم الزر */
-        .action-button {
-            padding: 20px 60px;
-            background-color: #ff9900; /* لون أمازون */
-            color: white;
-            font-size: 32px;
-            font-weight: bold;
-            border: none;
+        body {
+            background-color: #f4f6f8;
+            color: #333;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        header h1 {
+            color: #111;
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+        header p {
+            color: #666;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .card {
+            background: #fff;
             border-radius: 12px;
-            cursor: pointer;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-            transition: transform 0.2s ease, background-color 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
         }
-
-        /* تأثير عند مرور الماوس فوق الزر */
-        .action-button:hover {
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+        .card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+        .card-body {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
+        }
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .btn-amazon {
+            display: block;
+            text-align: center;
+            background-color: #ff9900;
+            color: #111;
+            font-weight: bold;
+            padding: 10px;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+        .btn-amazon:hover {
             background-color: #e68a00;
-            transform: scale(1.05);
-        }
-
-        /* تأثير عند الضغط الفعلي على الزر */
-        .action-button:active {
-            transform: scale(0.95);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
         }
     </style>
 </head>
 <body>
 
-    <!-- الزر الوحيد في الصفحة -->
-    <button class="action-button">Press Here</button>
+    <header>
+        <h1>أحدث التصاميم والمنتجات على أمازون</h1>
+        <p>اختر التصميم المفضّل لديك للاطلاع على التفاصيل الكاملة والشراء مباشرة</p>
+    </header>
 
-    <!-- سكريبت الفتح التلقائي المتسلسل -->
+    <div class="gallery" id="galleryContainer">
+        <!-- التصاميم تظهر هنا تلقائياً -->
+    </div>
+
     <script>
-        const myPinterestAds = [
-            "https://pin.it/4xbY20lzh",
-            "https://pin.it/72xpNqHsi",
-            "https://pin.it/3UP33Fuis"
+        // قائمة التصاميم مع روابط أمازون الخاصة بك
+        const designs = [
+            {
+                title: "تصميم 1 - Vintage T-Shirt",
+                image: "https://via.placeholder.com/300x220",
+                amazonUrl: "https://www.amazon.com/dp/YOUR_PRODUCT_ID_1"
+            },
+            {
+                title: "تصميم 2 - Minimalist Graphic",
+                image: "https://via.placeholder.com/300x220",
+                amazonUrl: "https://www.amazon.com/dp/YOUR_PRODUCT_ID_2"
+            },
+            {
+                title: "تصميم 3 - Streetwear Urban Design",
+                image: "https://via.placeholder.com/300x220",
+                amazonUrl: "https://www.amazon.com/dp/YOUR_PRODUCT_ID_3"
+            }
         ];
 
-        let currentAdIndex = 0;
+        const container = document.getElementById('galleryContainer');
 
-        // تفعيل الفتح عند الضغط في أي مكان بالشاشة (بما في ذلك الزر)
-        document.addEventListener('click', function() {
-            if (currentAdIndex < myPinterestAds.length) {
-                window.open(myPinterestAds[currentAdIndex], '_blank');
-                currentAdIndex++; 
-            }
+        designs.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <img src="${item.image}" alt="${item.title}">
+                <div class="card-body">
+                    <div class="card-title">${item.title}</div>
+                    <a href="${item.amazonUrl}" target="_blank" class="btn-amazon">شاهد المنتج على Amazon</a>
+                </div>
+            `;
+            container.appendChild(card);
         });
     </script>
-
 </body>
 </html>
