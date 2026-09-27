@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="pageTitle">العروض الحصرية والتصاميم المميزة</title>
+    <title id="pageTitle">معرض التصاميم المباشرة</title>
     <style>
         * {
             box-sizing: border-box;
@@ -96,7 +96,7 @@
             line-height: 1.4;
         }
 
-        /* حاوية الصورة القابلة للنقر */
+        /* معاينة الصورة القابلة للنقر */
         .image-container {
             position: relative;
             width: 100%;
@@ -122,7 +122,6 @@
             display: block;
         }
 
-        /* نص توضيحي فوق الصورة عند مرورة الماوس */
         .image-overlay {
             position: absolute;
             top: 0;
@@ -216,14 +215,14 @@
 
     <!-- البطاقة الرئيسية -->
     <div class="card">
-        <span class="badge" id="badgeText">عروض لفترة محدودة</span>
-        <h1 id="headingText">اكتشف أحدث التصاميم</h1>
-        <p id="descText">اضغط على الصورة أو الزر بالأسفل للاستعراض والتنقل.</p>
+        <span class="badge" id="badgeText">عرض الصور المباشرة</span>
+        <h1 id="headingText">استعراض التصاميم</h1>
+        <p id="descText">اضغط على الزر أو الصورة لفتح الصفحة والتنقل للتالية.</p>
 
         <!-- الصورة القابلة للنقر -->
         <div class="image-container" id="imageBox">
-            <img src="" id="designImg" alt="Design Preview">
-            <div class="image-overlay" id="overlayText">اضغط للاستعراض 🔍</div>
+            <img src="https://via.placeholder.com/500x300/203a43/ffffff?text=Design+Preview" id="designImg" alt="Design Preview">
+            <div class="image-overlay" id="overlayText">فتح الصورة المباشرة 🖼️</div>
         </div>
 
         <!-- مؤشر النقاط -->
@@ -234,28 +233,19 @@
         </div>
 
         <button class="action-button" id="mainBtn">
-            <span id="btnText">فتح التصميم والتالي</span>
+            <span id="btnText">فتح الصورة والتالي</span>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
         </button>
 
-        <div class="counter" id="statusText">التصميم 1 من 3</div>
+        <div class="counter" id="statusText">الصورة 1 من 3</div>
     </div>
 
     <script>
-        // مصفوفة البيانات: يحتوي كل عنصر على رابط الصورة ورابط Pinterest الخاص به
-        const designsData = [
-            {
-                url: "https://pin.it/4xbY20lzh",
-                img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500&q=80" // استبدلها برابط صورتك الأولى
-            },
-            {
-                url: "https://pin.it/72xpNqHsi",
-                img: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=500&q=80" // استبدلها برابط صورتك الثانية
-            },
-            {
-                url: "https://pin.it/3UP33Fuis",
-                img: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=500&q=80" // استبدلها برابط صورتك الثالثة
-            }
+        // روابط Pinterest المباشرة التي أرفقتها
+        const directImageLinks = [
+            "https://www.pinterest.com/pin/1127799931722268616/feedback/?invite_code=f8b42eea2dad42cfbc7b44c7e633472a&sender_id=1127800069093914891",
+            "https://www.pinterest.com/pin/1127799931722268862/feedback/?invite_code=0f9d17b010a34397bb08eb85ec7cad91&sender_id=1127800069093914891",
+            "https://www.pinterest.com/pin/112779993172270007/feedback/?invite_code=9b8b4c1818ab44f0a36d4650a8a24ae1&sender_id=1127800069093914891"
         ];
 
         let currentAdIndex = 0;
@@ -263,32 +253,31 @@
 
         const translations = {
             ar: {
-                title: "العروض الحصرية والتصاميم المميزة",
-                badge: "عروض لفترة محدودة",
-                heading: "اكتشف أحدث التصاميم",
-                desc: "اضغط على الصورة أو الزر بالأسفل للاستعراض والتنقل.",
-                overlay: "اضغط للاستعراض 🔍",
-                btnNext: "فتح التصميم والتالي",
-                btnFinish: "تمت مشاهدة الكل",
-                counter: (curr, total) => `التصميم ${curr} من ${total}`,
-                completed: "تم عرض جميع التصاميم بنجاح"
+                title: "معرض التصاميم المباشرة",
+                badge: "عرض الصور المباشرة",
+                heading: "استعراض التصاميم",
+                desc: "اضغط على الزر أو الصورة لفتح الصفحات بالتتابع.",
+                overlay: "فتح الصورة المباشرة 🖼️",
+                btnNext: "فتح الصورة والتالي",
+                btnFinish: "تمت مشاهدة جميع الصور",
+                counter: (curr, total) => `الصورة ${curr} من ${total}`,
+                completed: "تم استعراض كل الصور"
             },
             en: {
-                title: "Exclusive Offers & Designs",
-                badge: "Limited Time Offers",
-                heading: "Discover Latest Designs",
-                desc: "Click the image or the button below to view & navigate.",
-                overlay: "Click to View 🔍",
-                btnNext: "Open Design & Next",
-                btnFinish: "All Viewed",
-                counter: (curr, total) => `Design ${curr} of ${total}`,
-                completed: "All designs viewed successfully"
+                title: "Direct Image Gallery",
+                badge: "Direct View",
+                heading: "Browse Designs",
+                desc: "Click the image or button to open the pages in sequence.",
+                overlay: "Open Image 🖼️",
+                btnNext: "Open Image & Next",
+                btnFinish: "All Images Viewed",
+                counter: (curr, total) => `Image ${curr} of ${total}`,
+                completed: "All images browsed"
             }
         };
 
         const mainBtn = document.getElementById('mainBtn');
         const imageBox = document.getElementById('imageBox');
-        const designImg = document.getElementById('designImg');
         const statusText = document.getElementById('statusText');
 
         function setLanguage(lang) {
@@ -313,16 +302,12 @@
         function updateUI() {
             const t = translations[currentLang];
             
-            if (currentAdIndex < designsData.length) {
-                // تحديث الصورة الحالية
-                designImg.src = designsData[currentAdIndex].img;
-                
-                // تحديث النقاط النشطة
-                for (let i = 0; i < designsData.length; i++) {
+            if (currentAdIndex < directImageLinks.length) {
+                for (let i = 0; i < directImageLinks.length; i++) {
                     document.getElementById(`dot${i}`).className = (i === currentAdIndex) ? 'dot active' : 'dot';
                 }
 
-                statusText.textContent = t.counter(currentAdIndex + 1, designsData.length);
+                statusText.textContent = t.counter(currentAdIndex + 1, directImageLinks.length);
                 document.getElementById('btnText').textContent = t.btnNext;
             } else {
                 statusText.textContent = t.completed;
@@ -333,20 +318,17 @@
             }
         }
 
-        // الوظيفة المسؤولة عن فتح الرابط والانتقال للعنصر التالي
         function handleNextAction() {
-            if (currentAdIndex < designsData.length) {
-                window.open(designsData[currentAdIndex].url, '_blank');
+            if (currentAdIndex < directImageLinks.length) {
+                window.open(directImageLinks[currentAdIndex], '_blank');
                 currentAdIndex++;
                 updateUI();
             }
         }
 
-        // الربط بالزر وبالصورة
         mainBtn.addEventListener('click', handleNextAction);
         imageBox.addEventListener('click', handleNextAction);
 
-        // التهيئة الأولية
         setLanguage('ar');
     </script>
 
